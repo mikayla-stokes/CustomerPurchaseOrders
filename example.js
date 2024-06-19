@@ -1,6 +1,10 @@
 // Function to load data from CSV and display it as a list
 function loadAndDisplayData() {
-    d3.csv("data/purchase_orders.csv").then(data => {
+    // Define the delimiter for the CSV file
+    const delimiter = ",";
+
+    // Load the CSV file using d3.dsv
+    d3.dsv(delimiter, "data/purchase_orders.csv").then(data => {
         // Select the body element and append an unordered list
         const ul = d3.select("body").append("ul");
 
@@ -9,7 +13,7 @@ function loadAndDisplayData() {
             .data(data)
             .enter()
             .append("li")
-            .text(d => `${d.CustomerName} - Order ID: ${d.OrderID} - Purchase Amount: ${d.PurchaseAmount}`);
+            .text(d => `${d.customerName} - Order ID: ${d.orderId} - Purchase Amount: ${d.purchaseAmount}`);
     }).catch(error => {
         console.error('Error loading or parsing data:', error);
     });
